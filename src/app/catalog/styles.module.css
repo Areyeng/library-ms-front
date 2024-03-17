@@ -1,0 +1,33 @@
+.searchContainer {
+    display: flex;
+    align-items: center;
+    width: 800px; /* Adjust width as needed */
+    height: 40px; /* Adjust height as needed */
+    background-color: #C8AF86;
+    opacity: 0.8;
+    padding: 5px;
+    position: absolute;
+    top: 200px;
+    margin-left: 340px;
+  }
+  
+  .searchInput {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 0 20px;
+    background-color: #C8AF86;
+    color: #5F4834;
+  }
+  
+  .searchIcon {
+    padding: 0 10px;
+    cursor: pointer;
+  }
+.cards{
+    top: 100px;
+    margin-left: 300px;
+    padding: 20px;
+    display: flex;
+}

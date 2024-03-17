@@ -1,95 +1,30 @@
+import Link from "next/link";
+import styles from "./styles.module.css";
 import Image from "next/image";
-import styles from "./page.module.css";
-
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+import BookCarousel from "@/components/Carousel";
+import { Button } from 'antd';
+// import {useStyles} from "./styles";
+export default function Home() :React.ReactNode{
+    return <>
+           
+           <Image className={styles.imageStyle} src="/landing_bg.jpg" width="1920" height="1080" alt="next-logo"  />
+            <h1 className={styles.libraryName}>READERS&apos; EMPORIUM</h1>
+            <h3 className={styles.librarySlogan}>Unveiling Worlds, One Page at a Time.</h3>
+            <div className={styles.searchContainer}>
+              <input type="text" className={styles.searchInput} placeholder="Search the catalog..."/>
+                <div className={styles.searchIcon}>
+                     <Image className={styles.imageStyle} src="/search.png" width="24" height="24"  alt="search-bar"  />
+                </div>
+            </div>
+            <h3 className={styles.communityHeading}>POPULAR READS</h3>
+            <BookCarousel/>
+            <Button><Link href="/catalog">View More Books</Link></Button>
+            <h3 className={styles.communityHeading}>READERS&apos; COMMUNITIES</h3>
+            <div className={styles.community}>
+               <Image className={styles.communityImage} src="/community.png" width="350" height="350"  alt="people-reading"  />
+               <p className={styles.communityText}>Join our dynamic library community! Connect with fellow book lovers, share recommendations, and engage in inspiring discussions. Discover new literary treasures and fuel your passion for reading. Join us today and be part of a vibrant world of books!</p>
+            </div>
+            <h3 className={styles.communityHeading}>UPCOMING EVENTS</h3>
+            <BookCarousel/>
+           </>
 }
