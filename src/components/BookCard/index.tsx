@@ -26,7 +26,7 @@ interface Props {
   books: Book[];
 }
 
-export default function BookCard({ books }: Props): React.ReactNode {
+export default function BookCard({books}: Props): React.ReactNode {
   const { styles, cx } = useStyles();
   return (
      books.map((book) => (
