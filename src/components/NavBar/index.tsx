@@ -5,8 +5,8 @@ export default function NavBar(): React.ReactNode{
 return (
         <header>
             <nav className={styles.nav}>
-                <Link href="/profile" >ACCOUNT</Link>
-                <Link href="/profile" >EVENTS</Link>
+                <Link href="/login" >LOG IN</Link>
+                <Link href="/events" >EVENTS</Link>
                 <Link href="/profile" >RESERVE A ROOM</Link>
                 <Link href="/catalog" >CATALOG</Link>
                 <Link href="/" >HOME</Link>

@@ -5,6 +5,7 @@ import BookDetails from "@/components/BookDetails";
 import { Card } from "antd"
 import styles from "./styles.module.css";
 import Image from "next/image";
+import BookCarousel from "@/components/Carousel";
 
 const BookList = [
     {
@@ -48,6 +49,7 @@ export default function Book(){
     
     return(
         <>
+        <div>
             <div className={styles.searchContainer}>
               <input type="text" className={styles.searchInput} placeholder="Search the catalog..."/>
                 <div className={styles.searchIcon}>
@@ -58,7 +60,12 @@ export default function Book(){
             <div className={styles.cards}>
                 <BookDetails/>
             </div>
-            
+           
+        </div>
+        {/* <div>
+                <BookCarousel/>
+            </div> */}
         </>
-    )
+        
+    );
 }

@@ -35,7 +35,7 @@ export default function BookCard({ books }: Props): React.ReactNode {
         className={cx(styles.card)}
         key={book.id}
         hoverable
-        style={{ width: 240 }}
+        // style={{ width: 240 }}
         cover={<Image src={book.image} width="240" height="300" alt="book-image" />}
       >
         <Meta title={book.title} description={book.author} />

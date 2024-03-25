@@ -30,4 +30,11 @@
     margin-left: 300px;
     padding: 20px;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+}
+.catalogHeading{
+  position: absolute;
+  margin-top:1px;
 }

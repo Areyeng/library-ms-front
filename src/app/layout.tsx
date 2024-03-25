@@ -1,5 +1,5 @@
 import NavBar from "@/components/NavBar"
-import Footer from "@/components/Footer"
+import PageFooter from "@/components/PageFooter"
 import styles from "./styles.module.css";
 
 export const metadata = {
@@ -12,12 +12,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) :React.ReactNode{
+
   return (
     <html lang="en">
       <body className={styles.body}>
         <NavBar/>
         {children}
-        {/* <Footer/> */}
+        <PageFooter/>
       </body>
     </html>
   )

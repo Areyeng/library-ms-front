@@ -1,4 +1,6 @@
 'use client';
+import BookCard from "@/components/BookCard"
+
 import Image from "next/image";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -20,6 +22,116 @@ const responsive = {
     slidesToSlide: 1 // optional, default to 1.
   }
 };
+const BookList = [
+  {
+      id: 1,
+      title: "Book 1",
+      author: "Author 1",
+      description: "description 1",
+      publisher: "publisher 1",
+      isbn: 0,
+      image: "/book1.jpg",
+      genre: "genre 1",
+      shelfNumber: 1,
+      like: 1
+  },
+  {
+      id: 2,
+      title: "Book 2",
+      author: "Author 2",
+      description: "description 2",
+      publisher: "publisher 2",
+      isbn: 0,
+      image: "/book2.jpg",
+      genre: "genre 2",
+      shelfNumber: 2,
+      like: 2
+  },
+  {
+      id: 3,
+      title: "Book 3",
+      author: "Author 3",
+      description: "description 3",
+      publisher: "publisher 3",
+      isbn: 0,
+      image: "/book3.jpg",
+      genre: "genre 3",
+      shelfNumber: 3,
+      like: 3
+  },
+  {
+    id: 1,
+    title: "Book 1",
+    author: "Author 1",
+    description: "description 1",
+    publisher: "publisher 1",
+    isbn: 0,
+    image: "/book1.jpg",
+    genre: "genre 1",
+    shelfNumber: 1,
+    like: 1
+},
+{
+    id: 2,
+    title: "Book 2",
+    author: "Author 2",
+    description: "description 2",
+    publisher: "publisher 2",
+    isbn: 0,
+    image: "/book2.jpg",
+    genre: "genre 2",
+    shelfNumber: 2,
+    like: 2
+},
+{
+    id: 3,
+    title: "Book 3",
+    author: "Author 3",
+    description: "description 3",
+    publisher: "publisher 3",
+    isbn: 0,
+    image: "/book3.jpg",
+    genre: "genre 3",
+    shelfNumber: 3,
+    like: 3
+},
+{
+  id: 1,
+  title: "Book 1",
+  author: "Author 1",
+  description: "description 1",
+  publisher: "publisher 1",
+  isbn: 0,
+  image: "/book1.jpg",
+  genre: "genre 1",
+  shelfNumber: 1,
+  like: 1
+},
+{
+  id: 2,
+  title: "Book 2",
+  author: "Author 2",
+  description: "description 2",
+  publisher: "publisher 2",
+  isbn: 0,
+  image: "/book2.jpg",
+  genre: "genre 2",
+  shelfNumber: 2,
+  like: 2
+},
+{
+  id: 3,
+  title: "Book 3",
+  author: "Author 3",
+  description: "description 3",
+  publisher: "publisher 3",
+  isbn: 0,
+  image: "/book3.jpg",
+  genre: "genre 3",
+  shelfNumber: 3,
+  like: 3
+},
+]
 export default function BookCarousel() :React.ReactNode{
 return (
         <Carousel
@@ -41,10 +153,13 @@ return (
             itemClass="carousel-item-padding-40-px,carousel-item-margin-100-px"
             
             >
-            <div><Image  src="/book1.jpg" width="250" height="250"  alt="book"  /></div>
-            <div><Image  src="/book2.jpg" width="250" height="250"  alt="book"  /></div>
-            <div><Image  src="/book3.jpg" width="250" height="250"  alt="book"  /></div>
-            <div><Image  src="/book4.jpg" width="250" height="250"  alt="book"  /></div>
+              
+            {BookList.map(book => (
+              <div key={book.id}>
+                <Image src={book.image} width="240" height="300" alt="book-image" style={{borderRadius:'10px'}}/>
+              </div>
+            ))}
+            
         </Carousel>
     );
     
