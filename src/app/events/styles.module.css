@@ -1,0 +1,30 @@
+.eventsHeading{
+    margin-top: 50px;
+    color: #C8AF86;
+    font-size: 50px;
+    text-align: center;
+}
+.eventsDiv{
+    width:900px;
+    height:500px;
+    position: relative;
+    
+    margin-left:250px;
+}
+
+.imageDiv{
+    background-color: grey;
+    width: 700px;
+    height: 400px;
+    margin-top: 100px;
+   
+}
+.detailsDiv{
+    position: absolute;
+    top: 25px;
+    margin-left: 600px;
+    z-index: 1;
+    background-color: #C8AF86;
+    width: 400px;
+    height:400px
+}

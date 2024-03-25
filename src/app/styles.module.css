@@ -1,0 +1,77 @@
+.body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.imageStyle{
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+}
+.libraryName{
+    position: absolute;
+    top: 300px;
+    margin-left: 300px;
+    color: white;
+    font-size: 80px;
+    font-family:Arial, Helvetica, sans-serif;
+    
+}
+.librarySlogan{
+    position: absolute;
+    top: 400px;
+    margin-left: 450px;
+    color: white;
+    font-size: 40px;
+}
+/*Landing page search bar*/
+.searchContainer {
+    display: flex;
+    align-items: center;
+    width: 800px; /* Adjust width as needed */
+    height: 80px; /* Adjust height as needed */
+    background-color: #C8AF86;
+    opacity: 0.8;
+    padding: 5px;
+    position: absolute;
+    top: 600px;
+    margin-left: 340px;
+  }
+  
+  .searchInput {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 26px;
+    padding: 0 30px;
+    background-color: #C8AF86;
+    color: #5F4834;
+  }
+  
+  .searchIcon {
+    padding: 0 20px;
+    cursor: pointer;
+  }
+  /*communities*/
+  .communityHeading{
+    color: #C8AF86; 
+    font-size: 40px; 
+    font-weight: bold; 
+    text-align: center;
+  }
+  .communityImage{
+    margin-left: 200px;
+  }
+  .community{
+    display: flex;
+    width: 1000px;
+    margin-left: 150px;
+   
+  }
+  .communityText{
+    margin-top: 100px;
+    margin-left: 50px;
+    font-size: 20px;
+    color:#5F4834;
+    
+  }
