@@ -1,6 +1,8 @@
 import NavBar from "@/components/NavBar"
 import PageFooter from "@/components/PageFooter"
 import styles from "./styles.module.css";
+import { AuthProvider } from "@/providers/AuthProvider";
+import { RegisterProvider } from "@/providers/RegisterAuth";
 
 export const metadata = {
   title: 'Readers Emporium',
@@ -14,12 +16,17 @@ export default function RootLayout({
 }) :React.ReactNode{
 
   return (
-    <html lang="en">
-      <body className={styles.body}>
-        {/* <NavBar/> */}
-        {children}
-        {/* <PageFooter/> */}
-      </body>
-    </html>
+    <AuthProvider>
+      <RegisterProvider>
+        <html lang="en">
+        <body className={styles.body}>
+          <NavBar/>
+          {children}
+          <PageFooter/>
+        </body>
+      </html>
+      </RegisterProvider>
+    </AuthProvider>
+    
   )
 }

@@ -17,7 +17,7 @@ const RegisterProvider: React.FC<RegisterProviderProps>=({ children })=>{
             
            await axios.post('https://localhost:44311/api/services/app/Member/CreateMember',register).then((resp)=>{
                 if(resp.data){
-
+                  message.success("registered succesfully");
                 }else{
 
 
@@ -25,6 +25,7 @@ const RegisterProvider: React.FC<RegisterProviderProps>=({ children })=>{
             })
          }catch(error){
          console.log("Error");
+         message.error("unsucessfull registration")
          }
        
     }

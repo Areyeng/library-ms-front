@@ -10,7 +10,8 @@ const userReducer = (state:RegisterState, action: Action): RegisterState => {
             surname:'',
             emailAddress:'',
             phoneNumber:'',
-            password:''// Use action.payload if provided, otherwise set to null
+            password:'',// Use action.payload if provided, otherwise set to null
+            memberID:''
         };
      
       default:
