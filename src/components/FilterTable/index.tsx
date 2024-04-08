@@ -22,11 +22,7 @@ const data: DataItem[] = [
     category: 'Genre',
     options: ['Thriller', 'Fiction', 'Biography']
   },
-  {
-    key: '3',
-    category: 'Author',
-    options: ['Author1', 'Author2', 'Author3']
-  }
+
 ];
 
 const columns = [

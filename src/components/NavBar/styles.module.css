@@ -7,6 +7,7 @@
       /* position: fixed; */
       z-index: 1000; 
       color: white;
+     
     }
     
 .nav a {
@@ -29,6 +30,7 @@
       border-bottom: 1px;
     }
 
-.main-back .logo{
+.main-back{
       z-index: 2000; 
+      position: relative;
     }

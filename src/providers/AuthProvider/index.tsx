@@ -5,29 +5,30 @@ import {AuthActionContext,AuthStateContext,INITIAL_STATE } from './context';
 import axios from 'axios';
 import { Details } from './interface';
 import { message } from 'antd';
+import { useRouter } from 'next/navigation';
+
 
 interface AuthProviderProps{
     children: React.ReactNode;
 }
 const AuthProvider: React.FC<AuthProviderProps>=({ children })=>{
     const [state,dispatch] = useReducer(userReducer,INITIAL_STATE);
-
+    const {push} = useRouter();
+   
     const login = async (details: Details)=>{
         try{
             const response = await axios.post('https://localhost:44311/api/TokenAuth/Authenticate',details,{
                 headers: {
                     "Content-Type": "application/json-patch+json",
-                    'Origin': 'http://localhost:3000'
+                  
                 }
                
             })
-            console.log("response: ",response);
+          
             if(response.status==200){
                 dispatch({type: "LogIn",payload:response.data.result.accessToken})
-                console.log("state: ",state);
-                localStorage.setItem("token",response.data.result.accessToken)
-                message.success("Successfully logged in");
-                //push(/landing);
+                localStorage.setItem('token',response.data.result.accessToke)
+                push('/home');
             }
             else{
                 message.error("Failed to log in");
@@ -39,10 +40,10 @@ const AuthProvider: React.FC<AuthProviderProps>=({ children })=>{
         }
     }
     const logout = () => {
-        // Clear the token from localStorage
-        localStorage.removeItem('authToken');
-        if(localStorage.getItem('authToken') === null) {
-        message.success('Logout successful');
+        localStorage.removeItem('token');
+        dispatch({type: "LogOut"})
+        if(localStorage.getItem('token') === null) {
+            push('/login')
         }
         else
         {
@@ -77,5 +78,5 @@ const useAuthActions = () => {
   return context;
 };
  
-export { AuthProvider, useAuthState, useAuthActions };
+export { AuthProvider, useAuthState, useAuthActions, AuthStateContext };
  

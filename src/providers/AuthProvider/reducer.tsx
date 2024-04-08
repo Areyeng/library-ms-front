@@ -1,8 +1,8 @@
 import { AuthState,Action } from "./interface";
 
 const userReducer = (state: AuthState, action: Action): AuthState => {
-    console.log("action", action);
-    console.log("state", state);
+    // console.log("action", action);
+    // console.log("state", state);
     switch (action.type) {
       case 'LOGIN':
         return {

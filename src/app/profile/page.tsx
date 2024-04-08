@@ -1,12 +1,17 @@
-import React from 'react';
-import BookCard from "@/components/BookCard";
+"use client";
+import React, { useContext, useEffect, useState } from 'react';
+import { useAuthState } from '@/providers/AuthProvider';
 import styles from "./styles.module.css";
 import Image from "next/image";
+import { Details } from '@/providers/AuthProvider/interface';
+import { AuthStateContext } from '@/providers/AuthProvider';
+import axios from 'axios';
+import { message } from 'antd';
+import withAuth from '@/hocs/withAuth';
 
-
-export const metadata = {
-    title: "Registered User Profile",
-}
+// export const metadata = {
+//     title: "Registered User Profile",
+// }
 const BookList = [
     {
         id: 1,
@@ -77,81 +82,54 @@ const EventList = [
     },
  
 ]
-export default function Profile() :React.ReactNode{
+function Profile() :React.ReactNode{
+    // const { authToken } = useContext(AuthStateContext); // Accessing the authentication state including the token
+    // console.log("token after logging in: ", authToken);
+    const [userDetails, setUserDetails] = useState(null);
+    let authToken: string | null;
+    let userID: string | null;
+    authToken = localStorage.getItem("token");
+    userID = localStorage.getItem("userID");
+    console.log("UserID: ", userID);
+
+useEffect(() => {
+    const fetchUserDetails = async () => {
+        try {
+            if (!authToken) {
+                // Handle case when authToken is not available
+                throw new Error("Authentication token not found");
+            }
+
+            // Make a GET request to your backend API endpoint to fetch user details
+            const response = await axios.get(`https://localhost:44311/api/services/app/User/Get?Id=${userID}`, {
+                headers: {
+                    Authorization: `Bearer ${authToken}`, // Include token in the authorization header
+                },
+            });
+
+            setUserDetails(response.data); // Update userDetails state with the fetched user details
+            console.log("Returned profile data: ", response.data);
+        } catch (error) {
+           
+            message.error("Unsuccessful fetch"); // Set error state if request fails
+        }
+    };
+
+    fetchUserDetails(); // Call the fetchUserDetails function when the component mounts
+}, [authToken]);
 
     return(
         <>
-            <div className={styles.backProfile}></div>
-            <div className={styles.sideContent}>
-                <div className={styles.shelfContent}>
-                    <div className={styles.shelfHeading}><h1>My Shelf</h1></div>
-                    {
-                        BookList.map((book,i) => (
-                            <div key={i} className={styles.bookDiv}>
-                                <div className={styles.imageDiv}>
-                                <Image src={book.image} width="80" height="80" alt="book-image" />
-                                </div>
-                            </div>
-            
-                        ))
-                    }
-                </div>
-                <div className={styles.communityCard}>
-                <div className={styles.communityHeading}><h1>My Communities</h1></div>
-                    {
-                         EventList.map((event) => (
-     
-                            <div key={event.eventId} className={styles.eventCard}>
-                            
-                            <div className={styles.eventDetails}>
-                                <p><b>Community Name</b></p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id nisi a magna dapibus consequat at in arcu. </p>
-                                <p>Every 2nd Tuesday</p>
-                            </div>
-                            <div className={styles.eventImage}></div>
-                    
-                        </div>
-                         ))
-                    }
-                </div>
-                <div className={styles.profileDetails}>
-                    <div className={styles.favouriteBooks}>
-                    {
-                        BookList.map((book,i) => (
-                            <div key={i} className={styles.bookDiv}>
-                                <div className={styles.imageDiv}>
-                                <Image src={book.image} width="80" height="80" alt="book-image" />
-                                </div>
-                            </div>
-            
-                        ))
-                    }
-                    </div>
-                    <div className={styles.preferences}>
-                        
-                    </div>
-                    <div className={styles.upcomingEvents}>
-                    {
-                         EventList.map((event) => (
-     
-                            <div key={event.eventId} className={styles.eventCard}>
-                            
-                            <div>
-                                <p><b>Community Name</b></p>
-                               
-                                <p>Every 2nd Tuesday</p>
-                            </div>
-                            
-                    
-                        </div>
-                         ))
-                    }
-                  </div>
-                </div>
-               
+        <div className={styles.profileCard}>
+            <div className={styles.profileImage}>
             </div>
-        </>
+            <div>
+                <p><b>Name: </b></p>
+            </div>
+        </div>
         
+        </>
     );
         
 }
+export default withAuth(Profile);

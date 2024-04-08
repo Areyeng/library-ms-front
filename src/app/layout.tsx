@@ -3,6 +3,9 @@ import PageFooter from "@/components/PageFooter"
 import styles from "./styles.module.css";
 import { AuthProvider } from "@/providers/AuthProvider";
 import { RegisterProvider } from "@/providers/RegisterAuth";
+import { BookProvider } from "@/providers/BookProvider";
+import { BookRequestProvider } from "@/providers/BookRequestProvider";
+import { UserProvider } from "@/providers/UserProvider";
 
 export const metadata = {
   title: 'Readers Emporium',
@@ -14,17 +17,23 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) :React.ReactNode{
+  
 
   return (
     <AuthProvider>
       <RegisterProvider>
-        <html lang="en">
-        <body className={styles.body}>
-          <NavBar/>
-          {children}
-          <PageFooter/>
-        </body>
-      </html>
+        <BookProvider>
+          <BookRequestProvider>
+            <UserProvider>
+              <html lang="en">
+                <body className={styles.body}>
+                  {children}
+                  
+                </body>
+              </html>
+            </UserProvider>
+          </BookRequestProvider>
+        </BookProvider>
       </RegisterProvider>
     </AuthProvider>
     

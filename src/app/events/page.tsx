@@ -1,5 +1,7 @@
+'use client'
 import EventCard from "@/components/EventCard";
 import styles from "./styles.module.css";
+import withAuth from "@/hocs/withAuth";
 
 
 // export const metadata = {
@@ -56,7 +58,7 @@ const EventList = [
     }
   ]
   
-export default function Events() :React.ReactNode{
+function Events() :React.ReactNode{
     return(
         <>
             <h1 className={styles.eventsHeading}>Events</h1>
@@ -73,3 +75,4 @@ export default function Events() :React.ReactNode{
         
     
 }
+export default withAuth(Events);

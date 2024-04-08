@@ -5,28 +5,35 @@ import {RegisterActionContext,RegisterStateContext,INITIAL_STATE } from './conte
 import axios from 'axios';
 import { message } from 'antd';
 import {Register} from './interface';
+import { postData } from '@/utils/api';
+import { useRouter } from 'next/navigation';
 
 interface RegisterProviderProps{
     children: React.ReactNode;
 }
 const RegisterProvider: React.FC<RegisterProviderProps>=({ children })=>{
     const [state,dispatch] = useReducer(userReducer,INITIAL_STATE);
-
+    const {push} = useRouter();
     const Register = async (register: Register)=>{
-        try{
+        
             
-           await axios.post('https://localhost:44311/api/services/app/Member/CreateMember',register).then((resp)=>{
-                if(resp.data){
-                  message.success("registered succesfully");
-                }else{
+           
+              try {
 
-
-                }
-            })
-         }catch(error){
-         console.log("Error");
-         message.error("unsucessfull registration")
-         }
+                await postData('/Member/CreateMember',register).then((resp)=>{
+                        console.log('registering...');
+                        message.success("Added member succesfully");
+                       
+                        push('/home')
+                    
+                })
+            } catch (error) {
+                console.log("Error");
+                message.error("Member not added")
+            }  
+              
+            
+        
        
     }
     return (

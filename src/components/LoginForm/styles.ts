@@ -3,7 +3,7 @@ import { createStyles } from 'antd-style';
 export const useStyles = createStyles(({ css, cx }) => ({
     
   form: css`
-    padding: 200px 100px 200px 100px;
+    padding: 50px 100px 200px 100px;
     font-weight:semi-bold;
   `,
   input: css`
@@ -11,9 +11,11 @@ export const useStyles = createStyles(({ css, cx }) => ({
   `,
   button: css`
     background-color: #C8AF86;
-    width: 405px
+    width: 405px;
   `,
-// Override css on hover
+  register: css`
+    text-align: center;
+  `
 
   
 }));

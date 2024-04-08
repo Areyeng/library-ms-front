@@ -23,15 +23,21 @@
      font-size: 25px;
      text-align: center;
  }
+ .heading{
+    text-align: center;
+    color: #C8AF86;
+    margin-top: 150px;
+ }
 .divContainer{
     display: flex;
     background-color: ghostwhite;
+    height: 825px;
 }
 .leftDiv{
     width: 600px;
     height: 650px;
     background-color: black;
-    margin-top: 200px;
+    margin-top: 100px;
     margin-left: 200px;
     position: relative;
 
@@ -40,5 +46,5 @@
     width: 600px;
     height: 650px;
     background-color:white;
-    margin-top: 200px;
+    margin-top: 100px;
 }

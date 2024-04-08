@@ -17,7 +17,8 @@ export default function Login() :React.ReactNode{
                 </div>
             </div>
             <div className={styles.rightDiv}>
-            <LoginForm/>
+                <div className={styles.heading}><h1>READERS' EMPORIUM</h1></div>
+                <LoginForm/>
             </div>
         </div>
        

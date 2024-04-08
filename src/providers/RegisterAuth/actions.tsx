@@ -1,4 +1,5 @@
-import { createAction } from "redux-actions";
+import { createAction } from 'redux-actions';
+
 
 enum ActionTypes{
     Register = "Register"

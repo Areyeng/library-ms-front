@@ -8,16 +8,7 @@ import { useRegisterActions } from '@/providers/RegisterAuth';
 
 
 export default function RegisterForm(): React.ReactNode {
-  // const [formData, setFormData] = useState({
-  //   name: '',
-  //   surname: '',
-  //   age: 30,
-  //   email: '',
-  //   roleId: 1,
-  //   occupation: "Developer",
-  //   idNumber:"123456789012",
-  //   passport:"123456033355"
-  // });
+
   const [userDetails, setUserDetails] = useState<Register>({
     name: "",
     surname: "",
@@ -28,17 +19,8 @@ export default function RegisterForm(): React.ReactNode {
   });
   const {Register} = useRegisterActions();
   const { styles, cx } = useStyles();
-  const onFinish = async()=>{//value must inherit IUser
-    try{
-      
-      console.log("Details before await: ",userDetails);
-       Register(userDetails);
-       console.log("D: ",userDetails);
-
-      
-    }catch{
-
-    }
+  const onFinish = async()=>{
+    Register(userDetails);
     
   };
   return (
@@ -56,12 +38,16 @@ export default function RegisterForm(): React.ReactNode {
       <Form.Item label="EMAIL ADDRESS">
         <Input className={cx(styles.input)} placeholder='Email Address' onChange={(input)=>setUserDetails({...userDetails,emailAddress:input.target.value})} />
       </Form.Item>
+      <Form.Item label="PHONE NUMBER">
+        <Input className={cx(styles.input)} placeholder='Phone Number' onChange={(input)=>setUserDetails({...userDetails,phoneNumber:input.target.value})} />
+      </Form.Item>
+      <Form.Item label="MEMBER ID">
+        <Input className={cx(styles.input)} placeholder='Member Id' onChange={(input)=>setUserDetails({...userDetails,memberID:input.target.value})}/>
+      </Form.Item>
       <Form.Item label="PASSWORD">
         <Input.Password  className={cx(styles.input)} placeholder='Password' onChange={(input)=>setUserDetails({...userDetails,password:input.target.value})}/>
       </Form.Item>
-      <Form.Item label="Member ID">
-        <Input.Password  className={cx(styles.input)} placeholder='Member Id' onChange={(input)=>setUserDetails({...userDetails,memberID:input.target.value})}/>
-      </Form.Item>
+     
       <Form.Item>
         <Button type="primary" htmlType="submit" className={cx(styles.button)}>SIGN UP</Button>
       </Form.Item>

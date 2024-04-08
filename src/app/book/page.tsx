@@ -6,6 +6,7 @@ import { Card } from "antd"
 import styles from "./styles.module.css";
 import Image from "next/image";
 import BookCarousel from "@/components/Carousel";
+import withAuth from "@/hocs/withAuth";
 
 const BookList = [
     {
@@ -45,7 +46,7 @@ const BookList = [
         like: 3
     },
 ]
-export default function Book(){
+function Book(){
     
     return(
         <>
@@ -56,16 +57,11 @@ export default function Book(){
                      <Image className={styles.imageStyle} src="/search.png" width="24" height="24"  alt="search-bar"  />
                 </div>
             </div>
-           
             <div className={styles.cards}>
                 <BookDetails/>
             </div>
-           
         </div>
-        {/* <div>
-                <BookCarousel/>
-            </div> */}
         </>
-        
     );
 }
+export default withAuth(Book);

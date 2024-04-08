@@ -1,132 +1,15 @@
-/* styles.module.css */
-.backProfile {
-    width: 100%; 
-    height: 200px; 
-    background-color: #ccc; 
-    z-index: 1; 
-}
-.profileImg {
-    
-    width: 150px; 
-    height: 150px; 
-    background-color: #f00; 
-    border-radius: 50%; 
-
-}
-.sideContent{
+.profileCard{
     width: 600px;
-    height: 900px;
-   
+    height: 200px;
+    background-color: aquamarine;
+    margin: 0 auto;
 }
-.shelfContent{
-    width: 600px;
-    height: 450px;
-    margin-top: 20px;
-    margin-left: 100px;
-    background-color: #ccc;
-    border-radius: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    
-}
-.shelfHeading{
-    text-align: center;
-    width: 700px;
-    height: 50px;
-}
-.communityHeading{
-    width: 700px;
-    height: 50px;
-
-    margin-left: 180px;
-}
-.bookDiv{
-    width: 80px;
-    height: 100px;
-    background-color: aliceblue;
-    margin:10px;
-    border-radius: 10px;
-
-}
-
-.communityCard{
-    width: 600px;
-    height: 380px;
-    margin-top: 20px;
-    margin-left: 100px;
-    background-color: #ccc;
-    border-radius: 10px;
-    margin-top: 50px;
-}
-.eventCard {
-    
+.profileImage{
     width: 100px;
-    height: 100px;
-    margin-left: 150px;
-    margin-top: 10px;
-    margin-bottom:10px;
+    height:100px;
+    border-radius: 50%;
+    background-color: white;
+    top: 50px;
+    margin-left: 50px;
     position: relative;
-}
-
-.eventDate {
-    background-color: beige;
-    width: 50px;
-    height: 100px;
-    position: relative; 
-}
-
-.eventImage {
-    width: 80px;
-    height: 80px;
-    background-color: grey;
-    position: absolute;
-    top: 25px;
-    left: 200px;
-}
-
-.eventDetails {
-    position: absolute;
-    font-size: 10px;
-    top: 30%;
-    left: 37%;
-    transform: translate(-50%, -50%);
-    width:200px;
-    height: 50px;
-}
-.profileDetails{
-    width: 600px;
-    height: 880px;
-   top:290px;
-    margin-left: 800px;
-    background-color: #ccc;
-    border-radius: 10px;
-    margin-top: 50px;
-    position: absolute;
-
-}
-.upcomingEvents{
-    width: 450px;
-    height: 150px;
-    background-color: grey;
-    margin-top: 10px;
-    margin-left: 100px;
-    border-radius: 10px;
-}
-.favouriteBooks{
-    width: 450px;
-    height: 280px;
-    background-color: grey;
-    margin-top: 100px;
-    margin-left: 100px;
-    border-radius: 10px;
-    display: flex;
-    flex-wrap: wrap;
-}
-.preferences{
-    width: 450px;
-    height: 280px;
-    background-color: grey;
-    margin-top: 10px;
-    margin-left: 100px;
-    border-radius: 10px;
 }
