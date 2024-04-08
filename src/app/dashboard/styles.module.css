@@ -1,0 +1,87 @@
+.navigation{
+    width: 100%;
+    height: 100vh;
+    background-color: #C8AF86;
+}
+.mainDiv{
+    width:1390px;
+    height:90vh;
+    background-color: white;
+    border-radius: 20px;
+    margin-left: 100px;
+    top:80px;
+    position: relative;
+}
+.rowStats{
+    top: 200px;
+    position: relative;
+}
+
+.firstRow,.secondRow{
+    width: 1200px;
+    height: 110px;
+    display: flex;
+    margin-left: 100px;
+   
+}
+.numbers{
+    font-size: 35px;
+    font-weight: bold;
+    line-height: 5px;
+    margin-left: 50px;
+    color: white;
+}
+.stats{
+    font-size: 15px;
+    font-weight:lighter;
+    line-height: 1px;
+    margin-left: 50px;
+    color: white;
+}
+/* .firstRow{
+    margin-top: 500px;
+} */
+    
+.secondRow{
+    margin-top: 5px;
+}
+.firstDiv,.secondDiv,.thirdDiv,.fourthDiv{
+    width: 600px;
+    height:100px;
+    background-color: #C8AF86;
+    border-radius: 20px;
+    margin: 10px;
+}
+.usersDiv,.booksDiv{
+    width: 900px;
+    height:350px;
+    background-color: #C8AF86;
+    border-radius: 20px;
+    margin: 15px;
+}
+.customTable {
+    border-collapse: collapse;
+    width: 100%;
+    color: white;
+   
+  }
+  .customTable th, .custom-table td {
+    border: none;
+    border-bottom: 1px solid #ddd; 
+    padding: 16px 8px;
+    text-align: left;
+    margin-left: 10px;
+
+  }
+  .customTable th {
+    background-color: transparent;
+    color: #333;
+  }
+ 
+  .customTable tr:hover {
+    background-color: burlywood; 
+  }
+  .customTable tbody tr {
+    border-bottom: 1px solid #ddd;
+
+  }
