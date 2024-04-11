@@ -15,6 +15,6 @@ export const INITIAL_STATE: UserState = {
 
 export const UserStateContext = createContext<UserState>(INITIAL_STATE);
 export const UserActionContext = createContext<UserActions>({
-    GetAllUsers:async ()=> Promise<any>
-    
+    GetAllUsers:async ()=> Promise<any>,
+    GetUser:async ()=> Promise<any>
 })

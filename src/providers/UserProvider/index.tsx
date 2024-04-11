@@ -48,12 +48,33 @@ const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             message.error("users not fetched");
         }
     }
+    const GetUser = async (userID:any) => {
+        try {
+
+            return  await getData(`/${userID}`).then((res) => {
+                if (res) {
+                
+                    dispatch({ type: "GetUser", payload: res });
+                 
+                    return res;
+
+                } else {
+
+                    return []
+                }
+            })
+
+        } catch (error) {
+            console.log("Error");
+            message.error("users not fetched");
+        }
+    }
 
    
 
     return (
         <UserStateContext.Provider value={state}>
-            <UserActionContext.Provider value={{ GetAllUsers }}>
+            <UserActionContext.Provider value={{ GetAllUsers,GetUser }}>
                 {children}
             </UserActionContext.Provider>
         </UserStateContext.Provider>

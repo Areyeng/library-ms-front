@@ -13,6 +13,8 @@ export interface BookActions{
     AddBook: (bookDetails:BookDetails)=> void
     GetBook: (bookId:any)=> Promise<any>
     GetAllBooks:()=> Promise<any>
+    DeleteBook: (id:string)=> void
+    
 }
 export interface BookDetails{
     title : string,

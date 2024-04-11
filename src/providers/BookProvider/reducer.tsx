@@ -20,6 +20,12 @@ const bookReducer = (state:BookState, action: BookAction): BookState => {
             ...state,
 
           };
+        case 'GetAllBooks':
+            return {
+              ...state,
+  
+            };
+     
       default:
         return state;
     }

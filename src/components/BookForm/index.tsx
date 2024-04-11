@@ -1,12 +1,14 @@
 'use client'
 import { useBookActions } from "@/providers/BookProvider";
+import { useBookAction } from "@/providers/BookProviders";
 import { BookDetails } from "@/providers/BookProvider/interface";
 import { Button, Form, Input } from "antd";
 import { useState } from "react";
 import { Modal } from 'antd';
+import { PlusCircleFilled } from "@ant-design/icons";
 
 
-export default function BookForm(): React.ReactNode {
+export default function BookForm(updateDetails): React.ReactNode {
     const [bookDetails, setBookDetails] = useState<BookDetails>({
         title : '',
         author : '',
@@ -20,21 +22,27 @@ export default function BookForm(): React.ReactNode {
       });
       const [isModalVisible, setIsModalVisible] = useState(false);
 
+      
+      const {AddBook,GetAllBooks} = useBookActions();
+      const {addBook,getAllBooks} = useBookAction();//New BookProviders
+      const {updateBook} = useBookAction();
       const showModal = () => {
-          setIsModalVisible(true);
-      };
-  
-      const handleCancel = () => {
-          setIsModalVisible(false);
-      };
-      const {AddBook} = useBookActions();
+        setIsModalVisible(true);
+    };
+
+    const handleCancel = () => {
+     
+        setIsModalVisible(false);
+    };
       const onFinish = async()=>{
         try{
           
           console.log("Details before await: ",bookDetails);
-          AddBook(bookDetails);
-          console.log("Book details after: ",bookDetails);
-          handleCancel()
+          addBook(bookDetails);
+          const books =  GetAllBooks();
+          updateDetails(books);
+          console.log("New Book details after: ",books);
+          handleCancel();
           
         }catch{
 
@@ -43,8 +51,9 @@ export default function BookForm(): React.ReactNode {
       };
     return(
         <>
-        <Button type="primary" onClick={showModal}>
-          Add Book
+        <Button onClick={showModal}>
+           <PlusCircleFilled />
+          Add Book 
         </Button>
         <Modal
                 title="Add Book"

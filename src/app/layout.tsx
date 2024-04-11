@@ -6,6 +6,8 @@ import { RegisterProvider } from "@/providers/RegisterAuth";
 import { BookProvider } from "@/providers/BookProvider";
 import { BookRequestProvider } from "@/providers/BookRequestProvider";
 import { UserProvider } from "@/providers/UserProvider";
+import { BookProviders } from "@/providers/BookProviders";
+import { SearchProvider } from "@/providers/Search";
 
 export const metadata = {
   title: 'Readers Emporium',
@@ -25,12 +27,15 @@ export default function RootLayout({
         <BookProvider>
           <BookRequestProvider>
             <UserProvider>
-              <html lang="en">
-                <body className={styles.body}>
-                  {children}
-                  
-                </body>
-              </html>
+              <BookProviders>
+                <SearchProvider>
+                  <html lang="en">
+                    <body className={styles.body}>
+                      {children}
+                      </body>
+                  </html>
+                </SearchProvider>
+              </BookProviders>
             </UserProvider>
           </BookRequestProvider>
         </BookProvider>

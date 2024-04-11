@@ -14,10 +14,11 @@ export const INITIAL_STATE: BookState = {
 }
 
 
-export const BookStateContext = createContext<BookState>(INITIAL_STATE);
-export const BookActionContext = createContext<BookActions>({
+export const BookStatesContext = createContext<BookState>(INITIAL_STATE);
+export const BookActionsContext = createContext<BookActions>({
     AddBook: ()=>{},
     GetBook: async ()=> Promise<any>,
-    GetAllBooks:async ()=> Promise<any>
-
+    GetAllBooks:async ()=> Promise<any>,
+    DeleteBook: ()=>{},
+   
 })

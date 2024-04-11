@@ -27,7 +27,9 @@ const AuthProvider: React.FC<AuthProviderProps>=({ children })=>{
           
             if(response.status==200){
                 dispatch({type: "LogIn",payload:response.data.result.accessToken})
-                localStorage.setItem('token',response.data.result.accessToke)
+                localStorage.setItem('token',response.data.result.accessToken)
+                localStorage.setItem('userID',response.data.result.userId)
+                localStorage.setItem('email',details.userNameOrEmailAddress)
                 push('/home');
             }
             else{

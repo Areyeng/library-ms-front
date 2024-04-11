@@ -7,47 +7,35 @@ import styles from "./styles.module.css";
 import Image from "next/image";
 import BookCarousel from "@/components/Carousel";
 import withAuth from "@/hocs/withAuth";
+import { useRouter } from 'next/navigation';
+import { useContext, useEffect, useState } from 'react';
+import { BookActionsContext } from "@/providers/BookProvider/context";
 
-const BookList = [
-    {
-        id: 1,
-        title: "Book 1",
-        author: "Author 1",
-        description: "description 1",
-        publisher: "publisher 1",
-        isbn: 0,
-        image: "/book1.jpg",
-        genre: "genre 1",
-        shelfNumber: 1,
-        like: 1
-    },
-    {
-        id: 2,
-        title: "Book 2",
-        author: "Author 2",
-        description: "description 2",
-        publisher: "publisher 2",
-        isbn: 0,
-        image: "/book2.jpg",
-        genre: "genre 2",
-        shelfNumber: 2,
-        like: 2
-    },
-    {
-        id: 3,
-        title: "Book 3",
-        author: "Author 3",
-        description: "description 3",
-        publisher: "publisher 3",
-        isbn: 0,
-        image: "/book3.jpg",
-        genre: "genre 3",
-        shelfNumber: 3,
-        like: 3
-    },
-]
+
 function Book(){
-    
+    const router = useRouter();
+    const { GetBook } = useContext(BookActionsContext);
+    const searchParams = new URLSearchParams(window.location.search);
+    const bookId = searchParams.get('bookID');
+    const [books,setBooks] = useState();
+
+    useEffect(() => {
+      
+    const fetchBook = async () => {
+        try {
+                if(bookId!=null){
+                    const data3= await GetBook(bookId);
+                     setBooks(data3);
+                }
+                
+        } catch (error) {
+          console.error('Error fetching all books:', error);
+        }
+       
+        
+      };
+    fetchBook();
+    }, []);
     return(
         <>
         <div>
@@ -58,10 +46,10 @@ function Book(){
                 </div>
             </div>
             <div className={styles.cards}>
-                <BookDetails/>
+                {books && <BookDetails books={books}/>}
             </div>
         </div>
         </>
     );
 }
-export default withAuth(Book);
+export default withAuth(Book)

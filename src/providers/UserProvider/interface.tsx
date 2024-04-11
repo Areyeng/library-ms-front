@@ -8,7 +8,7 @@ export interface UserState{
 }
 export interface UserActions{
     GetAllUsers:()=> Promise<any>,
-   
+    GetUser:(userID:any)=> Promise<any>
 }
 export interface UserDetails{
     name: string,

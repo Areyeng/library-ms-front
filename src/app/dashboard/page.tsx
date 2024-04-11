@@ -1,56 +1,29 @@
 'use client'
-import { Button, Form, Input, Layout, Menu, Table, message } from "antd";
+import { Button, Form, Input, Layout, Menu, Table, message,Popconfirm } from "antd";
+import type { GetRef, InputRef } from 'antd';
 import styles from "./styles.module.css";
 import { useContext,useEffect, useRef, useState } from "react";
 import BookForm from "@/components/BookForm";
 import withAuth from "@/hocs/withAuth";
 import Sider from "antd/es/layout/Sider";
 import { Content } from "antd/es/layout/layout";
+import {DeleteFilled, EditOutlined} from '@ant-design/icons';
 import {UserActionContext } from "@/providers/UserProvider/context";
-import {BookActionContext } from "@/providers/BookProvider/context";
+import {BookActionContext, IBook } from "@/providers/BookProviders/context";
+import {BookActionsContext } from "@/providers/BookProvider/context";
 import { BookRequestActionContext } from "@/providers/BookRequestProvider/context";
 import EventForm from "@/components/EventForm/page";
+import React from "react";
+import BookFormEdit from "@/components/BookFormEdit";
 
 
 function Dashboard() :React.ReactNode{
-    
-    //   var data1 = [
-    //     {
-    //       key: '1',
-    //       name: 'John',
-    //       surname: 'Doe',
-    //       email: 'john.doe@example.com',
-    //       phoneNumber: '123-456-7890',
-    //       bookBorrowed: 'Harry Potter and the Sorcerer\'s Stone'
-    //     },
-    //     {
-    //       key: '2',
-    //       name: 'Jane',
-    //       surname: 'Smith',
-    //       email: 'jane.smith@example.com',
-    //       phoneNumber: '987-654-3210',
-    //       bookBorrowed: 'To Kill a Mockingbird'
-    //     }
-    //   ];
-      
-      const data2 = [
-        {
-          key: '1',
-          name: 'Alice',
-          surname: 'Johnson',
-          email: 'alice.johnson@example.com',
-          phoneNumber: '111-222-3333',
-          bookBorrowed: 'The Great Gatsby'
-        },
-        {
-          key: '2',
-          name: 'Bob',
-          surname: 'Brown',
-          email: 'bob.brown@example.com',
-          phoneNumber: '444-555-6666',
-          bookBorrowed: 'Pride and Prejudice'
-        }
-      ];
+  interface DataType {
+    key: React.Key;
+    name: string;
+    age: string;
+    address: string;
+  }
 
       const memberColumns = [
         {
@@ -106,51 +79,45 @@ function Dashboard() :React.ReactNode{
           key: 'phoneNumber',
         },
       ];
-      const bookColumns = [
-        {
-          title: 'Book Title',
-          dataIndex: 'title',
-          key: 'title',
-        },
-        {
-          title: 'Author',
-          dataIndex: 'author',
-          key: 'author',
-        },
-        {
-          title: 'Publisher ',
-          dataIndex: 'publisher',
-          key: 'publisher',
-        },
-        {
-          title: 'ISBN',
-          dataIndex: 'isbn',
-          key: 'isbn',
-        },
-        {
-          title: 'Shelf Number',
-          dataIndex: 'shelfNumber',
-          key: 'shelfNumber',
-        },
-        {
-            title: 'Genre',
-            dataIndex: 'genre',
-            key: 'genre',
-          },
-      ];
+ 
       const [selectedMenuKey, setSelectedMenuKey] = useState('1');
       const { GetAllUsers } = useContext(UserActionContext);
       const { GetAllRequests } = useContext(BookRequestActionContext);
-      const { GetAllBooks } = useContext(BookActionContext);
-      const { GetBook } = useContext(BookActionContext);
+      const { GetAllBooks } = useContext(BookActionsContext);
+      const { GetBook } = useContext(BookActionsContext);
+      const { DeleteBook } = useContext(BookActionsContext);
       const [tableColumns,setColumns] = useState([{}]);
       const [memberDetails,setMemberDetails] = useState();
       const [bookRequests,setBookRequests] = useState();
-      const [book,setBook] = useState();
-      const booksRef = useRef([]);
+      const [editDialog,setEditDialog] = useState(false);
+      const [showEditDialog, setShowEditDialog] = useState(false);
+      const [editRecord, setEditRecord] = useState<any>(null);
+    
+      const [book,setBook] = useState([]);
       let tableData;
-      let columns1;
+      let columns:any[] =[];
       let data3;
+
+    
+    
+
+      useEffect(()=>{
+        const fetchAllBooks = async () => {
+          try {
+             data3=  await GetAllBooks();
+             setBook(data3.items);
+             console.log('setbooks:' ,data3.items)
+             
+          } catch (error) {
+            console.error('Error fetching all books:', error);
+          }
+         
+          
+        };
+      fetchAllBooks();
+
+      },[])
+
        useEffect(() => {
        
         const fetchRequests = async () => {
@@ -164,30 +131,9 @@ function Dashboard() :React.ReactNode{
             }
           };
           fetchRequests();
-          const fetchAllBooks = async () => {
-            try {
-               data3=  await GetAllBooks();
-               booksRef.current = data3.items;
-               
-              
-               
-            } catch (error) {
-              console.error('Error fetching all books:', error);
-            }
-           
-          };
-        fetchAllBooks();
-        const fetchBook = async () =>{
-            try {
-                const data4=  await GetAllRequests(); 
-                setBook(data4);
-             
-               console.log('book requests: ',bookRequests)
-             } catch (error) {
-               console.error('Error fetching member:', error);
-             }
-        }
-          const fetchMembers = async () => {
+          
+
+        const fetchMembers = async () => {
             try {
               const data1 =  await GetAllUsers() 
               setMemberDetails(data1);
@@ -198,30 +144,115 @@ function Dashboard() :React.ReactNode{
           };
         fetchMembers();  
       },[]);
-      
-    
-        const handleMenuSelect = (e:any) => {
-            setSelectedMenuKey(e.key);
-        };
 
+      const handleEddy = (rec: any) => {
+        setEditRecord(rec);
+        setShowEditDialog(true);
+      };
+      
+      const updateDetails = (updatedDetails) =>{
+        setBook(updatedDetails);
+      }
+      const handleMenuSelect = (e:any) => {
+            setSelectedMenuKey(e.key);
+      };
+       //delete
+       const handleDelete = async (id:string) => {
+          
+        console.log('delete key: ',id);
+        DeleteBook(id);
         
+        const updatedBooks = await GetAllBooks();
+        console.log('updatedBooks: ',updatedBooks);
+        setBook(updatedBooks.items);
+      };
+   
+      const handleCancel = () => {
+        setShowEditDialog(false);
+      };
+
+     
+    
+     
+
+      const [bookColumns, setBookColumns] = useState([
+        {
+          title: 'Book Title',
+          dataIndex: 'title',
+          key: 'title',
+          editable: true,
+        },
+        {
+          title: 'Author',
+          dataIndex: 'author',
+          key: 'author',
+          editable: true,
+        },
+        {
+          title: 'Publisher ',
+          dataIndex: 'publisher',
+          key: 'publisher',
+          editable: true,
+        },
+        {
+          title: 'ISBN',
+          dataIndex: 'isbn',
+          key: 'isbn',
+          editable: true,
+        },
+        {
+          title: 'Shelf Number',
+          dataIndex: 'shelfNumber',
+          key: 'shelfNumber',
+          editable: true,
+        },
+        {
+            title: 'Genre',
+            dataIndex: 'genre',
+            key: 'genre',
+            editable:true,
+          },
+          {
+            title: 'Action',
+            dataIndex: 'action',
+            render: (_: any, record: any) => (
+              <span>
+                <Button type="primary" onClick={() => handleEddy(record)}>
+                  <EditOutlined />
+                </Button>
+                <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.id)}>
+                  <Button>
+                    <DeleteFilled />
+                  </Button>
+                </Popconfirm>
+                {/* { record.id && (
+                  <BookFormEdit record={record} />
+                )} */}
+              </span>
+            ),
+          },
+          
+      ]);
         
         if (selectedMenuKey === '1') {
             tableData = memberDetails;
-            columns1 = memberColumns;
+            columns = memberColumns;
         } else if (selectedMenuKey === '2') {
            
             tableData = bookRequests;
-            columns1 = requestColumns;
+            columns = requestColumns;
         }
         else if (selectedMenuKey ==='3') {
            
-            tableData =  booksRef.current;
-            columns1 = bookColumns;
+            tableData = book;
+            columns = bookColumns;
         }
-    
+     
+       
         return (
             <>
+          <BookForm updateDetails = {updateDetails}/>
+
             <Layout style={{ minHeight: '100vh' }}>
             <Sider>
               <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" onSelect={handleMenuSelect}>
@@ -232,14 +263,22 @@ function Dashboard() :React.ReactNode{
             </Sider>
             <Layout>
               <Content style={{ margin: '16px' }}>
-                <Table dataSource={tableData} columns={columns1} />
+                <Table 
+                dataSource={tableData} 
+                columns={columns}
+                rowClassName="editable-row"
+                bordered
+                />
               </Content>
             </Layout>
           </Layout>
-          <BookForm/>
-          {/* <EventForm/> */}
+          
+          
+      {showEditDialog && <BookFormEdit record={editRecord} hideModal={()=>setShowEditDialog(false)}  isModalVisible={showEditDialog} updateDetails = {updateDetails} />}
+          
           </>
            
         );
 }
+
 export default withAuth(Dashboard);

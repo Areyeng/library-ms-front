@@ -10,7 +10,7 @@ const withAuth = (Protected: any) => {
     const WithAuth = (props: any) => {
         const router = useRouter();
         const token= localStorage.getItem('token');
-        console.log("token: ",token)
+       
         if (!token) {
             router.push('/login')
         }

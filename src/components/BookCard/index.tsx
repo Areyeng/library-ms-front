@@ -38,37 +38,77 @@ twoWeeksAhead.setDate(currentDate.getDate() + 14);
 export default function BookCard({books}: Props): React.ReactNode {
 
     const { styles, cx } = useStyles();
-    const [requestDetails, setRequestDetails] = useState<BookRequestDetails>({
-      bookRequestedId : '',
-      requestorId :'',
-      requestDate: currentDate ,
-      returnDate : twoWeeksAhead ,
-      collected : false,
-      releasorId : ''
-    });
-    const {RequestBook} = useBookRequestActions();
-    const handleBorrowClick = (bookId:any) => {
+  //   const [requestDetails, setRequestDetails] = useState<BookRequestDetails>({
+  //     bookRequestedId : '',
+  //     requestorId :'',
+  //     requestDate: currentDate ,
+  //     returnDate : twoWeeksAhead ,
+  //     collected : false,
+  //     releasorId : ''
+  //   });
+  //   const {RequestBook} = useBookRequestActions();
+  //   const handleBorrowClick = (bookId:any) => {
 
-    const userID =localStorage.getItem('userID');
-      setRequestDetails(prevState => ({
-        ...prevState,
-        bookRequestedId: bookId,
-        requestorId: userID || '',
-        releasorId : userID || ''
-    }));//only updates after second click
-    try{
-      RequestBook(requestDetails);
-      console.log("Request details: ",requestDetails);      
-    }catch{
+  //   const userID =localStorage.getItem('userID');
+  //     setRequestDetails(prevState => ({
+  //       ...prevState,
+  //       bookRequestedId: bookId,
+  //       requestorId: userID || '',
+  //       releasorId : userID || ''
+  //   }));//only updates after second click
+  //   try{
+  //     RequestBook(requestDetails);
+  //     console.log("Request details: ",requestDetails);      
+  //   }catch{
 
-    }
+  //   }
     
+  // };
+  //Pop-over: 
+  const [clicked, setClicked] = useState(false);
+  const [hovered, setHovered] = useState(false);
+
+  const hide = () => {
+    setClicked(false);
+    setHovered(false);
   };
- 
+
+  const handleHoverChange = (open: boolean) => {
+    setHovered(open);
+    setClicked(false);
+  };
+
+  const handleClickChange = (open: boolean) => {
+    setHovered(false);
+    setClicked(open);
+  };
+
+  const hoverContent = books.map((book) => (
+    // <div key={book.id}>
+    <Card
+      key={book.id}
+      hoverable
+      className={styles.card}
+    >
+      <div style={{ position: 'relative', width: '100%', height: '200px' }}>
+        <Image src="/book.png" alt="Book Cover" layout="fill" />
+      </div>
+      <Meta title={book.title} description={book.author} /> 
+      <Button onClick={(e) => {
+        // e.stopPropagation(); // Prevents the click event from propagating to the parent div
+        // handleBorrowClick(book.id);
+      }}>Borrow</Button>
+      <Link href={`/book?bookID=${book.id}`} passHref>
+            <p>View Details</p>
+      </Link>
+    </Card>
+  // </div>
+   ))
+  const clickContent = <div>This is click content.</div>;
   
   return (
      books.map((book) => (
-      <div key={book.id}>
+      // <div key={book.id}>
       <Card
         key={book.id}
         hoverable
@@ -79,11 +119,14 @@ export default function BookCard({books}: Props): React.ReactNode {
         </div>
         <Meta title={book.title} description={book.author} /> 
         <Button onClick={(e) => {
-          e.stopPropagation(); // Prevents the click event from propagating to the parent div
-          handleBorrowClick(book.id);
+          // e.stopPropagation(); // Prevents the click event from propagating to the parent div
+          // handleBorrowClick(book.id);
         }}>Borrow</Button>
+        <Link href={`/book?bookID=${book.id}`} passHref>
+              <p>View Details</p>
+        </Link>
       </Card>
-    </div>
+    // </div>
      ))
 
     
